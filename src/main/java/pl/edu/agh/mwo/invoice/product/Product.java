@@ -13,13 +13,14 @@ public abstract class Product {
 		this.name = name;
 		this.price = price;
 		this.taxPercent = tax;
-		if (name == null) {
-			throw new IllegalArgumentException("Trzeba podac nazwe");
+		if (name == null || name.isEmpty()) {
+			throw new IllegalArgumentException("Trzeba podac nazwe - nie może być ona pusta");
 		}
 		if (price == null) {
-			throw new IllegalArgumentException("Trzeba podac cene");			
-		//}else if (price.)) {
-			
+			throw new IllegalArgumentException("Trzeba podac cene");		
+		}
+		if (price.compareTo(BigDecimal.ZERO)<0){
+			throw new IllegalArgumentException("Cena nie może być ujemna");
 		}
 	}
 
