@@ -13,8 +13,8 @@ public class Invoice {
 	}
 
 	public void addProduct(Product product, Integer quantity) {
-		if (quantity <0) {
-			throw new IllegalArgumentException("Ilosc nie może być ujemna");
+		if (quantity <0 || quantity == 0) {
+			throw new IllegalArgumentException("Ilosc nie może być ujemna ani wynosić 0");
 		}
 	}
 
