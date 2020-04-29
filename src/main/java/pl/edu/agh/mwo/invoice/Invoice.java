@@ -15,10 +15,13 @@ public class Invoice {
     }
 
     public void addProduct(Product product, Integer quantity) {
-        if (product == null || quantity <= 0) {
+        if (products.containsKey(product)) {
+            products.put(product, products.get(product) + quantity);
+        } else if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
+        } else {
+            products.put(product, quantity);
         }
-        products.put(product, quantity);
     }
 
     public BigDecimal getNetTotal() {
@@ -45,5 +48,18 @@ public class Invoice {
 
     public int getNumber() {
         return number;
+    }
+
+    public void print() {
+        System.out.println("Faktura numer: " + number);
+        System.out.printf("%-40s %-40s %-40s\n", 
+                "Nazwa produktu:", 
+                "Ilość:", 
+                "Cena jednej sztuki:");
+        for (Product product : products.keySet()) {
+            System.out.printf("%-40s %-40s %-40s\n", product.toStringName(), products.get(product),
+                    product.getPriceWithTax());
+        }
+        System.out.println("Liczba pozycji na fakturze: " + products.size() + "\n");
     }
 }
